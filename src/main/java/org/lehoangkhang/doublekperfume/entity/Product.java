@@ -21,7 +21,9 @@ public class Product {
     private double price;
     @ElementCollection
     private Set<String> images;
-    private String brand;
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
     //    Xuất xứ
     private String origin;
     @Enumerated(EnumType.STRING)
@@ -36,7 +38,6 @@ public class Product {
     private String middleNotes;
     @Column(name = "base_notes")
     private String baseNotes;
-
     //    Hướng dẫn sử dụng
     @Column(name = "how_to_use")
     private String howToUse;

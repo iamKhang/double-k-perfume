@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="/admin/fragments/Head :: head">
+    <title>Thêm sản phẩm</title>
+  </head>
+  <body>
+    <header th:replace="/admin/fragments/header :: header"></header>
+
+    <div class="container">
+      <h2>Thêm sản phẩm</h2>
+      <form>
+        <div class="form-group">
+          <label for="barcode">Barcode</label>
+          <input
+            type="text"
+            class="form-control"
+            id="barcode"
+            name="barcode"
+            placeholder="Nhập mã barcode sản phẩm"
+          />
+        </div>
+        <div class="form-group">
+          <label for="name">Tên sản phẩm</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Nhập tên sản phẩm"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Mô tả</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="price">Giá</label>
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            name="price"
+            placeholder="Giá sản phẩm"
+          />
+            <div id="priceSuggest" class="d-flex justify-content-start"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="volume">Dung tích</label>
+          <select class="form-control" id="volume" name="volume">
+            <option value="">Chọn dung tích</option>
+            <option value="1">50ml</option>
+            <option value="2">100ml</option>
+            <option value="3">150ml</option>
+            <option value="4">200ml</option>
+            <option value="5">250ml</option>
+          </select>
+        </div>
+
+        <!-- thêm các link ảnh -->
+        <div class="form-group">
+          <div class="add-link-img">
+            <label for="images">Link ảnh</label>
+            <input
+              type="text"
+              class="form-control images"
+              id="images"
+              name="images"
+              placeholder="Nhập link ảnh"
+            />
+          </div>
+          <button type="button" class="btn btn-primary mt-2">Thêm ảnh</button>
+        </div>
+
+        <div class="form-group">
+          <label for="brand">Thương hiệu</label>
+          <select class="form-control" id="brand" name="brand">
+            <option value="">Chọn thương hiệu</option>
+            <option value="1">Credd</option>
+            <option value="2">Versace</option>
+            <option value="3">Gucci</option>
+            <option value="4">Missoni</option>
+            <option value="5">Burberry</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="origin">Xuất xứ</label>
+          <input
+            type="text"
+            class="form-control"
+            id="origin"
+            name="origin"
+            placeholder="Nhập xuất xứ"
+          />
+        </div>
+
+        <!-- Loại da -->
+        <div class="form-group">
+          <label for="skinType">Loại da</label>
+          <select class="form-control" id="skinType" name="skinType">
+            <option value="">Chọn loại da</option>
+            <option value="1">Da khô</option>
+            <option value="2">Da dầu</option>
+            <option value="3">Da hỗn hợp</option>
+            <option value="4">Da nhạy cảm</option>
+          </select>
+        </div>
+
+        <!-- Mùi hương -->
+        <div class="form-group">
+          <label for="topNotes">Mùi hương</label>
+          <input
+            type="text"
+            class="form-control"
+            id="topNotes"
+            name="topNotes"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="middleNotes">Mùi hương giữa</label>
+          <input
+            type="text"
+            class="form-control"
+            id="middleNotes"
+            name="middleNotes"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="baseNotes">Mùi hương cuối</label>
+          <input
+            type="text"
+            class="form-control"
+            id="baseNotes"
+            name="baseNotes"
+          />
+        </div>
+
+        <!-- Hướng dẫn sử dụng -->
+        <div class="form-group">
+          <label for="howToUse">Hướng dẫn sử dụng</label>
+          <input
+            type="text"
+            class="form-control"
+            id="howToUse"
+            name="howToUse"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    const addLinkImg = document.querySelector(".add-link-img");
+    const btnAddImg = document.querySelector(".btn-primary");
+
+    btnAddImg.addEventListener("click", () => {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.className = "form-control mt-2 images";
+      input.placeholder = "Nhập link ảnh";
+      addLinkImg.appendChild(input);
+    });
+
+    const price = document.getElementById("price");
+    const priceSuggest = document.getElementById("priceSuggest");
+
+    price.addEventListener("input", () => {
+      const value = price.value;
+      const priceArr = [10, 100, 1000];
+      priceSuggest.innerHTML = "";
+      priceSuggest.classList.add("mt-2")
+      priceArr.forEach((item) => {
+        const div = document.createElement("div");
+        div.innerHTML = new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(value * item);
+        div.addEventListener("click", () => {
+          price.value = value * item;
+          priceSuggest.innerHTML = "";
+        });
+        priceSuggest.appendChild(div);
+      });
+    });
+   
+  
+
+  </script>
+</html>

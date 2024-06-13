@@ -135,6 +135,7 @@
 }
 .navitem:hover .subnav{
     display: grid;
+    z-index: 1;
 }
 
 .subnav{
