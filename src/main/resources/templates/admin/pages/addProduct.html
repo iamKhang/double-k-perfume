@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head th:replace="/admin/fragments/Head :: head">
     <title>Thêm sản phẩm</title>
   </head>
@@ -8,7 +8,12 @@
 
     <div class="container">
       <h2>Thêm sản phẩm</h2>
-      <form>
+      <form
+        th:action="@{/admin/product/add}"
+        th:object="${product}"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <div class="form-group">
           <label for="barcode">Barcode</label>
           <input
@@ -17,6 +22,7 @@
             id="barcode"
             name="barcode"
             placeholder="Nhập mã barcode sản phẩm"
+            th:field="*{barcode}"
           />
         </div>
         <div class="form-group">
@@ -27,6 +33,7 @@
             id="name"
             name="name"
             placeholder="Nhập tên sản phẩm"
+            th:field="*{name}"
           />
         </div>
         <div class="form-group">
@@ -35,6 +42,7 @@
             class="form-control"
             id="description"
             name="description"
+            th:field="*{description}"
           ></textarea>
         </div>
         <div class="form-group">
@@ -45,46 +53,61 @@
             id="price"
             name="price"
             placeholder="Giá sản phẩm"
+            th:field="*{price}"
           />
-            <div id="priceSuggest" class="d-flex justify-content-start"></div>
+          <div id="priceSuggest" class="d-flex justify-content-start"></div>
         </div>
 
         <div class="form-group">
           <label for="volume">Dung tích</label>
-          <select class="form-control" id="volume" name="volume">
-            <option value="">Chọn dung tích</option>
-            <option value="1">50ml</option>
-            <option value="2">100ml</option>
-            <option value="3">150ml</option>
-            <option value="4">200ml</option>
-            <option value="5">250ml</option>
+          <select class="form-control" id="volume" name="volume" th:field="*{volume}">
+            <!-- <option th:value="">Chọn dung tích</option> -->
+            <option th:value="1">50ml</option>
+            <option th:value="2">100ml</option>
+            <option th:value="3">150ml</option>
+            <option th:value="4">200ml</option>
+            <option th:value="5">250ml</option>
           </select>
         </div>
 
-        <!-- thêm các link ảnh -->
         <div class="form-group">
-          <div class="add-link-img">
-            <label for="images">Link ảnh</label>
-            <input
-              type="text"
-              class="form-control images"
-              id="images"
-              name="images"
-              placeholder="Nhập link ảnh"
-            />
+          <label for="images">Link ảnh</label>
+          <div id="imageLinks">
+            <div
+              th:each="image, iterStat : *{images}"
+              class="form-group d-flex"
+            >
+              <input
+                type="text"
+                class="form-control"
+                th:id="${'images' + iterStat.index}"
+                th:name="${'images[' + iterStat.index + ']'}"
+                placeholder="Nhập link ảnh"
+                th:field="${image}"
+              />
+              <button
+                type="button"
+                class="btn btn-danger btn-sm remove-image-link"
+              >
+                Xóa
+              </button>
+            </div>
           </div>
-          <button type="button" class="btn btn-primary mt-2">Thêm ảnh</button>
         </div>
 
         <div class="form-group">
           <label for="brand">Thương hiệu</label>
-          <select class="form-control" id="brand" name="brand">
-            <option value="">Chọn thương hiệu</option>
-            <option value="1">Credd</option>
-            <option value="2">Versace</option>
-            <option value="3">Gucci</option>
-            <option value="4">Missoni</option>
-            <option value="5">Burberry</option>
+          <select
+            class="form-control"
+            id="brand"
+            name="brand"
+            th:field="*{brand}"
+          >
+            <option
+              th:each="brand : ${brands}"
+              th:value="${brand.id}"
+              th:text="${brand.name}"
+            ></option>
           </select>
         </div>
 
@@ -96,13 +119,18 @@
             id="origin"
             name="origin"
             placeholder="Nhập xuất xứ"
+            th:field="*{origin}"
           />
         </div>
 
-        <!-- Loại da -->
         <div class="form-group">
           <label for="skinType">Loại da</label>
-          <select class="form-control" id="skinType" name="skinType">
+          <select
+            class="form-control"
+            id="skinType"
+            name="skinType"
+            th:field="*{skinType}"
+          >
             <option value="">Chọn loại da</option>
             <option value="1">Da khô</option>
             <option value="2">Da dầu</option>
@@ -111,7 +139,6 @@
           </select>
         </div>
 
-        <!-- Mùi hương -->
         <div class="form-group">
           <label for="topNotes">Mùi hương</label>
           <input
@@ -119,6 +146,8 @@
             class="form-control"
             id="topNotes"
             name="topNotes"
+            placeholder="Nhập mùi hương đầu"
+            th:field="*{topNotes}"
           />
         </div>
 
@@ -129,6 +158,8 @@
             class="form-control"
             id="middleNotes"
             name="middleNotes"
+            placeholder="Nhập mùi hương giữa"
+            th:field="*{middleNotes}"
           />
         </div>
 
@@ -139,10 +170,11 @@
             class="form-control"
             id="baseNotes"
             name="baseNotes"
+            placeholder="Nhập mùi hương cuối"
+            th:field="*{baseNotes}"
           />
         </div>
 
-        <!-- Hướng dẫn sử dụng -->
         <div class="form-group">
           <label for="howToUse">Hướng dẫn sử dụng</label>
           <input
@@ -150,6 +182,7 @@
             class="form-control"
             id="howToUse"
             name="howToUse"
+            th:field="*{howToUse}"
           />
         </div>
         <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
@@ -158,17 +191,50 @@
   </body>
 
   <script>
-    const addLinkImg = document.querySelector(".add-link-img");
-    const btnAddImg = document.querySelector(".btn-primary");
+    document.addEventListener("DOMContentLoaded", function () {
+      let imageLinkIndex = 1;
+      document
+        .getElementById("addImageLink")
+        .addEventListener("click", function () {
+          const newInputGroup = document.createElement("div");
+          newInputGroup.classList.add("form-group", "image-input-group");
+          newInputGroup.innerHTML = `
+             <div class="form-group d-flex">
+              <input
+                type="text"
+                class="form-control"
+                id="images0"
+                name="images"
+                placeholder="Nhập link ảnh"
+              />
+              <button type="button" class="btn btn-danger btn-sm remove-image-link">Xóa</button>
+            </div>
+        `;
+          document.getElementById("imageLinks").appendChild(newInputGroup);
+          updateRemoveButtons();
+          imageLinkIndex++;
+        });
 
-    btnAddImg.addEventListener("click", () => {
-      const input = document.createElement("input");
-      input.type = "text";
-      input.className = "form-control mt-2 images";
-      input.placeholder = "Nhập link ảnh";
-      addLinkImg.appendChild(input);
+      document
+        .getElementById("imageLinks")
+        .addEventListener("click", function (e) {
+          if (e.target.classList.contains("remove-image-link")) {
+            e.target.parentElement.remove();
+            updateRemoveButtons();
+          }
+        });
+
+      function updateRemoveButtons() {
+        const removeButtons = document.querySelectorAll(".remove-image-link");
+        if (removeButtons.length === 1) {
+          removeButtons[0].disabled = true;
+        } else {
+          removeButtons.forEach((button) => {
+            button.style.display = "inline-block";
+          });
+        }
+      }
     });
-
     const price = document.getElementById("price");
     const priceSuggest = document.getElementById("priceSuggest");
 
@@ -176,7 +242,7 @@
       const value = price.value;
       const priceArr = [10, 100, 1000];
       priceSuggest.innerHTML = "";
-      priceSuggest.classList.add("mt-2")
+      priceSuggest.classList.add("mt-2");
       priceArr.forEach((item) => {
         const div = document.createElement("div");
         div.innerHTML = new Intl.NumberFormat("vi-VN", {
@@ -190,8 +256,5 @@
         priceSuggest.appendChild(div);
       });
     });
-   
-  
-
   </script>
 </html>

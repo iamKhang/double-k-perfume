@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Brand {
     @Id
-    private int id;
+    private Integer id;
     private String name;
     @OneToMany(mappedBy = "brand")
     private List<Product> products;
