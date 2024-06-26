@@ -10,8 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin/product")
@@ -32,7 +36,9 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String addProduct(@ModelAttribute Product product) {
+    public String addProduct(@ModelAttribute Product product, @RequestParam("images") String[] imagesArray) {
+        Set<String> imagesSet = new HashSet<>(Arrays.asList(imagesArray));
+        product.setImages(imagesSet);
         productService.addProduct(product);
         return "redirect:/admin/product/add";
     }

@@ -1,4 +1,5 @@
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
 
 <!--Replace Head-->
 <head th:replace="/user/fragments/Head :: head">
@@ -15,67 +16,16 @@
 <main class="container">
     <div id="products">
         <div class="row">
-            <div class="col-md-3">
-                <img src="https://media.hcdn.vn/catalog/product/p/r/promotions-auto-nuoc-hoa-nu-narciso-rodriguez-ambree-edp-30ml_qEFaJWc5p6CrZRGr_img_358x358_843626_fit_center.png" class="card-img-top"
-                     alt="...">
+            <div class="col-md-3" th:each="product : ${products}">
+                <img th:if="${!product.images.empty}" th:src="${product.images.iterator().next()}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <p class="card-text">1.500.000 đ</p>
-<!--                    Nhà chế tác-->
+                    <p class="card-text" th:text="${product.price} + ' đ'">1.500.000 đ</p>
+                    <!-- Nhà chế tác -->
                     <p>
-                        <a href="#">Narciso Rodriguez</a>
+                        <!-- th:href="@{/brand/{name}(name=${product.brand.name})}" -->
+                        <a  th:text="${product.brand.name}">Narciso Rodriguez</a>
                     </p>
-                   <h5 class="card-title">Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml</h5>
-                    <div class="item-btn">
-                        <button class="btn btn-heart"><i class="fa-regular fa-heart"></i></button>
-                        <button class="btn btn-add-to-cart btn-primary"><i class="fa-solid fa-cart-plus"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <img src="https://media.hcdn.vn/catalog/product/f/a/facebook-dynamic-422201176-1704963488_img_358x358_843626_fit_center.jpg" class="card-img-top"
-                     alt="...">
-                <div class="card-body">
-                    <p class="card-text">1.500.000 đ</p>
-                    <!--                    Nhà chế tác-->
-                    <p>
-                        <a href="#">Narciso Rodriguez</a>
-                    </p>
-                    <h5 class="card-title">Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml</h5>
-                    <div class="item-btn">
-                        <button class="btn btn-heart"><i class="fa-regular fa-heart"></i></button>
-                        <button class="btn btn-add-to-cart btn-primary"><i class="fa-solid fa-cart-plus"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <img src="https://media.hcdn.vn/catalog/product/f/a/facebook-dynamic-328700016-1704964074_img_358x358_843626_fit_center.jpg" class="card-img-top"
-                     alt="...">
-                <div class="card-body">
-                    <p class="card-text">1.500.000 đ</p>
-                    <!--                    Nhà chế tác-->
-                    <p>
-                        <a href="#">Narciso Rodriguez</a>
-                    </p>
-                    <h5 class="card-title">Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml</h5>
-                    <div class="item-btn">
-                        <button class="btn btn-heart"><i class="fa-regular fa-heart"></i></button>
-                        <button class="btn btn-add-to-cart btn-primary"><i class="fa-solid fa-cart-plus"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <img src="https://media.hcdn.vn/catalog/product/n/u/nuoc-hoa-nam-versace-pour-homme-dylan-blue-edt-100ml-1_1_img_300x300_b798dd_fit_center.jpg" class="card-img-top"
-                     alt="...">
-                <div class="card-body">
-                    <p class="card-text">1.500.000 đ</p>
-                    <!--                    Nhà chế tác-->
-                    <p>
-                        <a href="#">Narciso Rodriguez</a>
-                    </p>
-                    <h5 class="card-title">Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml</h5>
+                    <h5 class="card-title" th:text="${product.name}">Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml</h5>
                     <div class="item-btn">
                         <button class="btn btn-heart"><i class="fa-regular fa-heart"></i></button>
                         <button class="btn btn-add-to-cart btn-primary"><i class="fa-solid fa-cart-plus"></i></button>

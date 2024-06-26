@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
-
 import java.util.Set;
 
 @Entity
@@ -17,6 +15,7 @@ public class Product {
     @Id
     private String barcode;
     private String name;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private double price;
     @ElementCollection
@@ -70,4 +69,10 @@ public class Product {
     }
 
 
+    public String[] getImagesArray() {
+        if (images != null) {
+            return images.toArray(new String[0]);
+        }
+        return new String[0]; // Trả về một mảng rỗng nếu không có hình ảnh
+    }
 }
