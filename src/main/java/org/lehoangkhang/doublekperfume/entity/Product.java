@@ -21,24 +21,25 @@ public class Product {
     @ElementCollection
     private Set<String> images;
     @ManyToOne
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_name")
     private Brand brand;
-    //    Xuất xứ
-    private String origin;
-    @Enumerated(EnumType.STRING)
-    private Sex sex;
+    //    Giới tính
+    private String sex;
     //    Loại da
     @Column(name = "skin_type")
     private String skinType;
-    //    Mùi hương
+    //    Tầng hương
     @Column(name = "top_notes")
     private String topNotes;
     @Column(name = "middle_notes")
     private String middleNotes;
     @Column(name = "base_notes")
     private String baseNotes;
+    // Nhóm hương
+    @Column(name = "perfume_scent")
+    private String perfumeScent;
     //    Hướng dẫn sử dụng
-    @Column(name = "how_to_use")
+    @Column(name = "how_to_use", columnDefinition = "TEXT")
     private String howToUse;
     //    Nhà chế tác
     @Column(name = "creator")
@@ -46,6 +47,10 @@ public class Product {
     //    Dung tích
     @Column(name = "volume")
     private int volume;
+    // Phong cách
+    @Column(name = "style")
+    private String style;
+    
 
     @Override
     public String toString() {
@@ -56,7 +61,6 @@ public class Product {
                 ", price=" + price +
                 ", images=" + images +
                 ", brand='" + brand + '\'' +
-                ", origin='" + origin + '\'' +
                 ", sex=" + sex +
                 ", skinType='" + skinType + '\'' +
                 ", topNotes='" + topNotes + '\'' +

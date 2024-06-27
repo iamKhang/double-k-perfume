@@ -19,7 +19,7 @@
             <div class="col-md-3" th:each="product : ${products}">
                 <img th:if="${!product.images.empty}" th:src="${product.images.iterator().next()}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <p class="card-text" th:text="${product.price} + ' đ'">1.500.000 đ</p>
+                    <p class="card-text" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">1.500.000 đ</p>
                     <!-- Nhà chế tác -->
                     <p>
                         <!-- th:href="@{/brand/{name}(name=${product.brand.name})}" -->

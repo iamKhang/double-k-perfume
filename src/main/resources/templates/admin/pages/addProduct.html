@@ -10,6 +10,7 @@
       <form
         th:action="@{/admin/product/add}"
         th:object="${product}"
+        id="addProductForm"
         method="post"
         enctype="multipart/form-data"
       >
@@ -65,12 +66,20 @@
             name="volume"
             th:field="*{volume}"
           >
-            <!-- <option th:value="">Chọn dung tích</option> -->
-            <option th:value="1">50ml</option>
-            <option th:value="2">100ml</option>
-            <option th:value="3">150ml</option>
-            <option th:value="4">200ml</option>
-            <option th:value="5">250ml</option>
+            <option th:value="50">50ml</option>
+            <option th:value="100">100ml</option>
+            <option th:value="150">150ml</option>
+            <option th:value="200">200ml</option>
+            <option th:value="250">250ml</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="sex">Giới tính</label>
+          <select class="form-control" id="sex" name="sex" th:field="*{sex}">
+            <option th:value="Nam">Nam</option>
+            <option th:value="Nữ">Nữ</option>
+            <option th:value="Unisex">Unisex</option>
           </select>
         </div>
 
@@ -119,14 +128,26 @@
         </div>
 
         <div class="form-group">
-          <label for="origin">Xuất xứ</label>
+          <label for="style">Phong cách</label>
           <input
             type="text"
             class="form-control"
-            id="origin"
-            name="origin"
-            placeholder="Nhập xuất xứ"
-            th:field="*{origin}"
+            id="style"
+            name="style"
+            placeholder="Phong cách"
+            th:field="*{style}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="creator">Nhà chế tác</label>
+          <input
+            type="text"
+            class="form-control"
+            id="creator"
+            name="creator"
+            placeholder="Nhà chế tác"
+            th:field="*{creator}"
           />
         </div>
 
@@ -138,16 +159,28 @@
             name="skinType"
             th:field="*{skinType}"
           >
-            <option value="">Chọn loại da</option>
-            <option value="1">Da khô</option>
-            <option value="2">Da dầu</option>
-            <option value="3">Da hỗn hợp</option>
-            <option value="4">Da nhạy cảm</option>
+            <option value="Tất cả loại da">Tất cả loại da</option>
+            <option value="Da khô">Da khô</option>
+            <option value="Da dầu">Da dầu</option>
+            <option value="Da hỗn hợp">Da hỗn hợp</option>
+            <option value="Da nhạy cảm">Da nhạy cảm</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="topNotes">Mùi hương</label>
+          <label for="perfume_scent">Nhóm hương</label>
+          <input
+            type="text"
+            class="form-control"
+            id="perfume_scent"
+            name="perfume_scent"
+            placeholder="Nhập nhóm hương"
+            th:field="*{perfumeScent}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="topNotes">Mùi hương đầu</label>
           <input
             type="text"
             class="form-control"
@@ -184,18 +217,38 @@
 
         <div class="form-group">
           <label for="howToUse">Hướng dẫn sử dụng</label>
-          <input
-            type="text"
+          <textarea
             class="form-control"
             id="howToUse"
             name="howToUse"
             th:field="*{howToUse}"
-          />
+          ></textarea>
         </div>
+
         <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
       </form>
     </div>
   </body>
+
+  <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+  <script>
+    CKEDITOR.replace("howToUse");
+    CKEDITOR.replace("description");
+
+    document
+      .querySelector("#addProductForm")
+      .addEventListener("submit", function (e) {
+        // Lấy nội dung từ CKEditor cho 'Mô tả'
+        const descriptionContent = CKEDITOR.instances.description.getData();
+        document.getElementById("description").value = descriptionContent;
+
+        // Lấy nội dung từ CKEditor cho 'Hướng dẫn sử dụng'
+        const howToUseContent = CKEDITOR.instances.howToUse.getData();
+        document.getElementById("howToUse").value = howToUseContent;
+
+        // Form sẽ tự động gửi sau khi cập nhật giá trị này
+      });
+  </script>
 
   <script>
     document
