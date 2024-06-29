@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoubleKPerfume</title>
+    <link
+      rel="stylesheet"
+      th:href="@{assetsUser/lib/bootstrap-4.5.3-dist/css/bootstrap.min.css}"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{assetsUser/lib/fontawesome-free-6.3.0-web/css/all.css}"
+    />
+    <!-- <link rel="stylesheet" th:href="@{assetsUser/css/index.css}"> -->
+    <link rel="stylesheet" th:href="@{assetsUser/css/header.css}" />
+    <link rel="stylesheet" th:href="@{assetsUser/css/footer.css}">
+    <link rel="stylesheet" th:href="@{assetsUser/css/login.css}" />
+  </head>
+
+  <body>
+    <header th:replace="/user/fragments/header :: header"></header>
+    <div class="container-fluid d-flex justify-content-center login_container_bg">
+      <form class="login_form" action="">
+        <p class="login_form_heading">Đăng kí</p>
+        <p class="">Đăng kí tài khoản để nhận toàn bộ ưu đãi!</p>
+        <div class="d-flex">
+          <div class="login_form_inputContainer mr-2">
+            <i class="fa-solid fa-address-card login_form_inputIcon"></i>
+            <input
+              placeholder="Họ"
+              id="username"
+              class="login_form_inputField"
+              type="text"
+            />
+          </div>
+          <div class="login_form_inputContainer">
+            <i class="fa-solid fa-address-card login_form_inputIcon"></i>
+            <input
+              placeholder="Tên"
+              id="username"
+              class="login_form_inputField"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="login_form_inputContainer">
+          <i class="fa-solid fa-user login_form_inputIcon"></i>
+          <input
+            placeholder="Tên người dùng"
+            id="username"
+            class="login_form_inputField"
+            type="text"
+          />
+        </div>
+
+        <div class="login_form_inputContainer">
+          <i class="fa-solid fa-at login_form_inputIcon"></i>
+          <input
+            placeholder="Email"
+            id="username"
+            class="login_form_inputField"
+            type="text"
+          />
+        </div>
+
+        <div class="login_form_inputContainer">
+          <i class="fa-solid fa-lock login_form_inputIcon"></i>
+          <input
+            placeholder="Mật khẩu"
+            id="password"
+            class="login_form_inputField"
+            type="password"
+          />
+        </div>
+
+        <div class="login_form_inputContainer">
+          <i class="fa-solid fa-lock login_form_inputIcon"></i>
+          <input
+            placeholder="Xác nhận mật khẩu"
+            id="password"
+            class="login_form_inputField"
+            type="password"
+          />
+        </div>
+
+        <button id="login_form_button">Đăng kí</button>
+        <div class="login_form_signupContainer d-flex justify-content-start">
+          <p>Bạn đã có tài khoản?</p>
+          <a href="">Đăng nhập</a>
+        </div>
+      </form>
+
+    </div>
+    <footer th:replace="/user/fragments/footer :: footer"></footer>
+  </body>
+</html>

@@ -23,6 +23,12 @@ public class HomeController {
         return "user/index";
     }
 
+    // Vào trang đăng ký
+    @GetMapping("/register")
+    public String register() {
+        return "user/pages/registerPage";
+    }
+
     // Vào trang đăng nhập
     @GetMapping("/login")
     public String login() {
