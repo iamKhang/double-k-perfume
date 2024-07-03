@@ -18,16 +18,13 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String description;
     private double price;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> images;
     @ManyToOne
     @JoinColumn(name = "brand_name")
     private Brand brand;
     //    Giới tính
     private String sex;
-    //    Loại da
-    @Column(name = "skin_type")
-    private String skinType;
     //    Tầng hương
     @Column(name = "top_notes")
     private String topNotes;
@@ -38,12 +35,8 @@ public class Product {
     // Nhóm hương
     @Column(name = "perfume_scent")
     private String perfumeScent;
-    //    Hướng dẫn sử dụng
-    @Column(name = "how_to_use", columnDefinition = "TEXT")
-    private String howToUse;
-    //    Nhà chế tác
-    @Column(name = "creator")
-    private String creator;
+    
+    
     //    Dung tích
     @Column(name = "volume")
     private int volume;
@@ -62,12 +55,9 @@ public class Product {
                 ", images=" + images +
                 ", brand='" + brand + '\'' +
                 ", sex=" + sex +
-                ", skinType='" + skinType + '\'' +
                 ", topNotes='" + topNotes + '\'' +
                 ", middleNotes='" + middleNotes + '\'' +
                 ", baseNotes='" + baseNotes + '\'' +
-                ", howToUse='" + howToUse + '\'' +
-                ", creator='" + creator + '\'' +
                 ", volume=" + volume +
                 '}';
     }

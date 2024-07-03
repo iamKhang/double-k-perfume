@@ -19,6 +19,7 @@ public class HomeController {
     @RequestMapping
     public String home(Model model) {
         List<Product> products = productService.getAllProducts();
+        System.out.println(products);
         model.addAttribute("products", products);
         return "user/index";
     }

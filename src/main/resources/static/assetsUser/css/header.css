@@ -67,6 +67,7 @@ li {
 
 .header_nav {
   background-color: #326e51;
+  height: 50px;
 }
 
 .header-web {
@@ -85,41 +86,9 @@ li {
   object-fit: contain; /* Đảm bảo logo không bị méo khi điều chỉnh kích thước */
 }
 
-.navbar li {
-  box-sizing: border-box;
-  display: inline-block;
-  min-height: 40px;
-  transition: transform 0.3s ease; /* Thêm transition cho li */
-  line-height: 100%;
-}
-.navbar li {
-  text-align: center; /* Căn giữa nội dung của li */
-  box-sizing: border-box;
-  display: inline-block;
-  min-height: 40px;
-  transition: transform 0.3s ease;
+.header-nav-item {
+  display: flex;
+  align-items: center; /* Căn giữa nội dung theo chiều dọc */
+  height: 100%; /* Đặt chiều cao cụ thể nếu cần */
 }
 
-.navbar{
-    margin-bottom: 0;
-}
-
-.navitem {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Đảm bảo .navitem có chiều cao cụ thể hoặc đủ để chứa thẻ <a> */
-  }
-
-.navbar li a {
-  display: inline-block;
-  /* Đảm bảo rằng thẻ a có đủ width để nội dung nằm giữa */
-  width: 100%; /* Hoặc một giá trị cụ thể phù hợp với nội dung */
-  transition: transform 0.3s ease;
-  height: 100%;
-}
-
-/* Cập nhật hoặc loại bỏ transform: translateX(-10px); nếu cần */
-.navbar li:hover {
-  transform: translateX(-10px); /* Cân nhắc loại bỏ hoặc điều chỉnh lại */
-}

@@ -10,7 +10,7 @@
         class="text-center text-uppercase font-weight-bold"
         style="margin-top: 20px; margin-bottom: 20px"
       >
-        Thêm sản phẩm
+        Cập nhật thông tin sản phẩm
       </p>
       <form
         th:action="@{/admin/product/add}"
@@ -19,17 +19,19 @@
         method="post"
         enctype="multipart/form-data"
       >
-        <div class="form-group">
-          <label for="barcode">Barcode</label>
-          <input
-            type="text"
-            class="form-control"
-            id="barcode"
-            name="barcode"
-            placeholder="Nhập mã barcode sản phẩm"
-            th:field="*{barcode}"
-          />
-        </div>
+      
+      <div class="form-group">
+        <label for="barcode">Barcode</label>
+        <input
+          type="text"
+          class="form-control"
+          id="barcode"
+          name="barcode"
+          placeholder="Nhập mã barcode sản phẩm"
+          th:field="*{barcode}"
+          readonly
+        />
+      </div>
         <div class="form-group">
           <label for="name">Tên sản phẩm</label>
           <input
@@ -88,12 +90,13 @@
         <div class="form-group">
           <label for="images">Link ảnh</label>
           <div id="imageLinks">
-            <div class="form-group d-flex imageLink">
+            <div th:each="image, iterStat : ${product.images}" class="form-group d-flex imageLink">
               <input
                 type="text"
                 class="form-control"
                 placeholder="Nhập link ảnh"
                 name="images"
+                th:value="${image}"
               />
               <button
                 type="button"
@@ -199,7 +202,9 @@
           ></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+        <div class="row d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+        </div>
       </form>
     </div>
   </body>

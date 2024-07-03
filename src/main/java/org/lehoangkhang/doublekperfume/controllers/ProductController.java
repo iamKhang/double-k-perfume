@@ -7,14 +7,18 @@ import org.lehoangkhang.doublekperfume.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale.Category;
 import java.util.Set;
 
 @Controller
@@ -42,6 +46,27 @@ public class ProductController {
         productService.addProduct(product);
         return "redirect:/admin/product/add";
     }
+
+
+    @GetMapping("/edit/{id}")
+	public String editProduct(Model model, @PathVariable("id") String id) {
+	    Product product = productService.getProductById(id);
+        // Hiển thị thông tin sản phẩm
+        System.out.println(product.toString());
+	    model.addAttribute("product", product);
+
+        List<Brand> brands = brandService.getAllBrands();
+        model.addAttribute("brands", brands);
+	    return "admin/pages/editProduct";
+	}
+	
+	@PostMapping("/product/edit/save")
+	public String saveEdit(@ModelAttribute Product product) {
+		if (productService.updateProduct(product)) {
+			return "redirect:/admin/product";
+		}
+		return "admin/pages/editProduct";
+	}
 
 
 }

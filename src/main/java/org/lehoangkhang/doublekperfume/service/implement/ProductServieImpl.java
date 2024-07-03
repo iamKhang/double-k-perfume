@@ -16,12 +16,13 @@ public class ProductServieImpl implements ProductService {
 
     @Override
     public List<Product> getAllProducts() {
+//        System.out.println(productRepostory.findAll());
         return productRepostory.findAll();
     }
 
     @Override
     public Product getProductById(String id) {
-        return null;
+        return productRepostory.findById(id).orElse(null);
     }
 
     @Override
@@ -36,8 +37,14 @@ public class ProductServieImpl implements ProductService {
     }
 
     @Override
-    public Product updateProduct(Product product) {
-        return null;
+    public boolean updateProduct(Product product) {
+        try {
+            productRepostory.save(product);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

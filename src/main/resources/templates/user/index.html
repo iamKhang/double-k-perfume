@@ -1,75 +1,52 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
->
-
-<!--Replace Head-->
-<head th:replace="/user/fragments/Head :: head">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <!--Replace Head-->
+  <head th:replace="/user/fragments/Head :: head">
     <title>DoubleKPerfume</title>
+  </head>
 
-</head>
-
-<body>
-
-<header th:replace="/user/fragments/header :: header"></header>
-
-<div id="myCarousel"></div>
-<main class="container">
-    <div id="products">
+  <body>
+    <header th:replace="/user/fragments/header :: header"></header>
+    <div class="container">
+      <div id="products">
         <div class="row">
-            <div class="col-md-3" th:each="product : ${products}">
-                <img th:if="${!product.images.empty}" th:src="${product.images.iterator().next()}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">1.500.000 đ</p>
-                    <!-- Nhà chế tác -->
-                    <p>
-                        <!-- th:href="@{/brand/{name}(name=${product.brand.name})}" -->
-                        <a  th:text="${product.brand.name}">Narciso Rodriguez</a>
-                    </p>
-                    <h5 class="card-title" th:text="${product.name}">Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml</h5>
-                    <div class="item-btn">
-                        <button class="btn btn-heart"><i class="fa-regular fa-heart"></i></button>
-                        <button class="btn btn-add-to-cart btn-primary"><i class="fa-solid fa-cart-plus"></i></button>
-                    </div>
-                </div>
+          <div class="col-md-3" th:each="product : ${products}">
+            <img
+              th:if="${!product.images.empty}"
+              th:src="${product.images.iterator().next()}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <p
+                class="card-text"
+                th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+              >
+                1.500.000 đ
+              </p>
+              <!-- Nhà chế tác -->
+              <p>
+                <!-- th:href="@{/brand/{name}(name=${product.brand.name})}" -->
+                <a th:text="${product.brand.name}">Narciso Rodriguez</a>
+              </p>
+              <h5 class="card-title" th:text="${product.name}">
+                Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml
+              </h5>
+              <div class="item-btn">
+                <button class="btn btn-heart">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="btn btn-add-to-cart btn-primary">
+                  <i class="fa-solid fa-cart-plus"></i>
+                </button>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="owl-stage">
-            <h3 class="owl-title">Thông tin</h3>
-            <div class="owl-items">
-                <div class="owl-item" style="margin-left: 10px;">
-                    <img th:src="@{assetsUser/img/nuoc-hoa-dung-duoc-cho-ca-nam-va-nu.png}" alt="">
-                    <h4>5 mùi nước hoa dùng được cho cả nam và nữ mà bạn không nên bỏ qua</h4>
-                    <p>Bạn có biết? Mùi nước hoa chính là điểm cuốn hút và ghi đậm dấu ấn với mọi người...</p>
-                </div>
-                <div class="owl-item">
-                    <img th:src="@{assetsUser/img/nuoc-hoa-thom-lau-cho-nam.png}" alt="">
-                    <h4>5 chai nước hoa thơm lâu mà nam giới không nên bỏ qua</h4>
-                    <p>Đâu là mùi nước hoa thơm lâu cho nam giới? Đây là câu hỏi mà hầu hết nam giới đều quan
-                        tâm...</p>
-                </div>
-                <div class="owl-item">
-                    <img th:src="@{assetsUser/img/nuoc-hoa-huong-thom-da-thit-parfumerievn.jpg}" alt="">
-                    <h4>Hương thơm da thịt, xu hướng mùi hương đang được yêu thích</h4>
-                    <p>Sở dĩ có tên mùi hương da thịt vì hương thơm của những chai nước hoa này có mùi vô cùng
-                        nhẹ nhàng...</p>
-                </div>
-                <div class="owl-item">
-                    <img th:src="@{assetsUser/img/nuoc-hoa-nam-dior-sauvage-edt-parfumerievn.jpg}" alt="">
-                    <h4>Để nắm bắt nữa kia, nàng thường chọn Dior sauvage EDT</h4>
-                    <p>Thấu hiểu và nắm bắt tâm lý phái mạnh, các nàng thường chọn Dior sauvage EDT như một món
-                        quà...</p>
-                </div>
-            </div>
-        </div>
-</main>
+    <footer id="footer" th:replace="/user/fragments/Footer :: footer"></footer>
 
-<footer id="footer" th:replace="/user/fragments/Footer :: footer"
-></footer>
-
-<script th:src="@{assetsUser/js/index.js}" type="module">
-</script>
-
-
-</body>
+    <script th:src="@{assetsUser/js/index.js}" type="module"></script>
+  </body>
 </html>
