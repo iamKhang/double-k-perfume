@@ -1,0 +1,62 @@
+/* CSS */
+.serv-show {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+
+.fas.fa-caret-down {
+  transition: transform 0.5s ease;
+}
+
+.fas.fa-caret-down.active {
+  transform: rotate(180deg);
+}
+
+/* CSS cho thanh nav */
+.sidebar {
+  background-color: #22503e; /* Màu nền chính */
+  color: white; /* Màu chữ */
+  width: 250px; /* Chiều rộng cố định của thanh nav */
+  height: 100vh; /* Chiều dài bằng với chiều dài trang web */
+  overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều dài */
+  overflow-x: hidden; /* Ẩn nội dung vượt quá chiều ngang */
+}
+
+.sidebar ul {
+  list-style-type: none; /* Loại bỏ dấu chấm của danh sách */
+  padding: 0; /* Loại bỏ padding mặc định */
+}
+
+.sidebar ul li {
+  padding: 10px; /* Thêm padding cho mỗi li */
+  font-size: 18px; /* Tăng kích thước font */
+  white-space: nowrap; /* Ngăn chặn xuống dòng */
+  overflow: hidden; /* Ẩn nội dung vượt quá chiều ngang */
+  text-overflow: ellipsis; /* Thêm dấu "..." nếu nội dung bị cắt */
+}
+
+.sidebar ul li a {
+  color: orange; /* Màu chữ cho liên kết */
+  text-decoration: none; /* Loại bỏ gạch chân */
+  display: block; /* Hiển thị liên kết dạng block để chiếm toàn bộ chiều rộng li */
+}
+
+.sidebar ul li a:hover {
+  background-color: orange; /* Màu nền khi hover */
+  color: #22503e; /* Màu chữ khi hover */
+}
+
+.sidebar .serv-show {
+  display: none; /* Ẩn submenu mặc định */
+  background-color: #2e5240; /* Màu nền cho submenu */
+}
+
+.sidebar .serv-show li {
+  padding-left: 20px; /* Thêm padding trái cho submenu để tạo khoảng cách */
+}
+
+.fas.fa-caret-down {
+  float: right; /* Đẩy icon caret về phía bên phải */
+}

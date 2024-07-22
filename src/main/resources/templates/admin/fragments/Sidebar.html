@@ -1,0 +1,66 @@
+<div
+  class="sidebar col-auto col-md-3 col-xl-2 px-sm-2 px-0"
+  th:fragment="sidebar"
+>
+  <div
+    class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
+  >
+    <ul
+      class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+      id="menu"
+    >
+      <li>
+        <a
+          href="#submenu1"
+          data-bs-toggle="collapse"
+          class="nav-link sidebar-nav-link px-0 align-middle"
+        >
+          <i class="fa-brands fa-product-hunt"></i>
+          <span class="ms-1 d-none d-sm-inline">Sản phẩm</span>
+        </a>
+        <ul
+          class="collapse show nav flex-column ms-1"
+          id="submenu1"
+          data-bs-parent="#menu"
+        >
+          <li class="w-100">
+            <a href="/admin/product/add" class="nav-link sidebar-nav-link px-0">
+              <span class="d-none d-sm-inline">Thêm sản phẩm</span></a
+            >
+          </li>
+          <li>
+            <a href="/admin/product/list" class="nav-link sidebar-nav-link px-0">
+              <span class="d-none d-sm-inline">Danh sách sản phẩm</span></a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a
+          href="#submenu2"
+          data-bs-toggle="collapse"
+          class="nav-link sidebar-nav-link px-0 align-middle"
+        >
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <span class="ms-1 d-none d-sm-inline">Đơn hàng</span></a
+        >
+        <ul
+          class="collapse nav flex-column ms-1"
+          id="submenu2"
+          data-bs-parent="#menu"
+        >
+          <li class="w-100">
+            <a href="#" class="nav-link sidebar-nav-link px-0">
+              <span class="d-none d-sm-inline">Danh sách đơn hàng</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="nav-link sidebar-nav-link px-0">
+              <span class="d-none d-sm-inline">Thống kê</span></a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

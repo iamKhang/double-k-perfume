@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm sản phẩm</title>
+    <script th:src="@{/assetsUser/js/jquery.js}"></script>
+    <link
+      rel="stylesheet"
+      th:href="@{/assetsUser/lib/bootstrap-4.5.3-dist/css/bootstrap.min.css}"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{/assetsUser/lib/fontawesome-free-6.3.0-web/css/all.css}"
+    />
+    <link rel="stylesheet" th:href="@{/assetsUser/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/assetsUser/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/assetsUser/css/footer.css}" />
+    <!-- <link rel="stylesheet" th:href="@{/assetsUser/css/sidebar.css}" /> -->
+    <link rel="stylesheet" th:href="@{/assetsAdmin/css/sidebar.css}" />
+
+    <style>
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <header th:replace="/admin/fragments/header :: header"></header>
+    <div class="container-fluid">
+      <div class="row flex-nowrap">
+        <div th:replace="/admin/fragments/sidebar :: sidebar"></div>
+
+        <div class="container right-content" id="products">
+          <p
+            class="text-center text-uppercase font-weight-bold"
+            style="margin-top: 20px; margin-bottom: 20px"
+          >
+            Danh sách sản phẩm
+          </p>
+
+          <!-- Bảng các sản phẩm -->
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Dung tích</th>
+                <th scope="col">Tình trạng</th>
+                <th scope="col">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="product : ${products}">
+                <td th:text="*{product.barcode}">1</td>
+                <td th:text="*{product.name}">Tên sản phẩm</td>
+                <td th:text="*{product.price}">Giá</td>
+                <!-- Hiển thị ảnh đầu tiên của sản phẩm -->
+                <td>
+                  <img
+                    th:if="${!product.images.empty}"
+                    th:src="${product.images.iterator().next()}"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                </td>
+                <td th:text="*{product.volume}">Dung tích</td>
+                <!-- Tình trạng nếu là false hoặc null thì hiển thị ngừng cung cấp ngược lại hiển thị rỗng -->
+                <td
+                  th:if="${product.isAvailable == false || product.isAvailable == null}"
+                >
+                  Ngừng cung cấp
+                </td>
+
+                <td th:if="${product.isAvailable == true}">Còn cung cấp</td>
+
+                <td>
+                  <a
+                    th:href="@{/admin/product/edit/{id}(id=${product.barcode})}"
+                    class="btn btn-primary"
+                  >
+                    Sửa
+                  </a>
+
+                  <!-- Nếu sản phẩm còn bán thì hiện nút "Ngừng cung cấp" khi nhấn vào /delete/{id}/{isAvailable} với giá trị là id và false -->
+                  <a
+                    th:if="${product.isAvailable == true}"
+                    th:href="@{/admin/product/delete/{id}/{isAvailable}(id=${product.barcode}, isAvailable=false)}"
+                    class="btn btn-danger"
+                  >
+                    Ngừng cung cấp
+                  </a>
+                  <!-- Nếu sản phẩm có isAvailable ==false thì hiện nút "Cung cấp" khi nhấn vào /delete/{id}/{isAvailable} với giá trị là id và true -->
+                  <a
+                    th:if="${product.isAvailable == false}"
+                    th:href="@{/admin/product/delete/{id}/{isAvailable}(id=${product.barcode}, isAvailable=true)}"
+                    class="btn btn-success"
+                  >
+                    Cung cấp
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <footer th:replace="/admin/fragments/footer :: footer"></footer>
+  </body>
+
+  <!-- <script th:src="@{/assetsUser/js/sidebar.js}"></script> -->
+  <script src="/utilities/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+  <script>
+    CKEDITOR.replace("howToUse");
+    CKEDITOR.replace("description");
+
+    document
+      .querySelector("#addProductForm")
+      .addEventListener("submit", function (e) {
+        // Lấy nội dung từ CKEditor cho 'Mô tả'
+        const descriptionContent = CKEDITOR.instances.description.getData();
+        document.getElementById("description").value = descriptionContent;
+
+        // Form sẽ tự động gửi sau khi cập nhật giá trị này
+      });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      // Hàm cập nhật chiều cao của .sidebar
+      function updateSidebarHeight() {
+        var contentHeight = $(".right-content").height();
+        $(".sidebar").height(contentHeight + 500);
+      }
+
+      // Cập nhật chiều cao khi trang được tải
+      updateSidebarHeight();
+
+      // Thêm link ảnh
+      document
+        .getElementById("addImageLink")
+        .addEventListener("click", function () {
+          const container = document.getElementById("imageLinks");
+          const index = container.children.length; // Lấy số lượng hiện tại của các input để tạo index động
+          const inputHTML = `<div class="form-group d-flex">
+        <input type="text" class="form-control" name="images" placeholder="Nhập link ảnh" />
+        <button type="button" class="btn btn-danger btn-sm remove-image-link" onclick="this.parentElement.remove(); updateRemoveButtonState(); updateSidebarHeight();">Xóa</button>
+      </div>`;
+          container.insertAdjacentHTML("beforeend", inputHTML);
+          updateRemoveButtonState();
+          updateSidebarHeight(); // Cập nhật chiều cao sau khi thêm
+        });
+
+      // Xóa link ảnh
+      document
+        .getElementById("imageLinks")
+        .addEventListener("click", function (e) {
+          if (e.target.classList.contains("remove-image-link")) {
+            e.target.parentElement.remove();
+            updateRemoveButtonState();
+            updateSidebarHeight(); // Cập nhật chiều cao sau khi xóa
+          }
+        });
+    });
+  </script>
+</html>

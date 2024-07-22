@@ -1,209 +1,251 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="/admin/fragments/Head :: head">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thêm sản phẩm</title>
+    <script th:src="@{/assetsUser/js/jquery.js}"></script>
+    <link
+      rel="stylesheet"
+      th:href="@{/assetsUser/lib/bootstrap-4.5.3-dist/css/bootstrap.min.css}"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{/assetsUser/lib/fontawesome-free-6.3.0-web/css/all.css}"
+    />
+    <link rel="stylesheet" th:href="@{/assetsUser/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/assetsUser/css/main.css}" />
+    <link rel="stylesheet" th:href="@{/assetsUser/css/footer.css}" />
+    <!-- <link rel="stylesheet" th:href="@{/assetsUser/css/sidebar.css}" /> -->
+    <link rel="stylesheet" th:href="@{/assetsAdmin/css/sidebar.css}" />
+
+    <style>
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+    </style>
   </head>
   <body>
     <header th:replace="/admin/fragments/header :: header"></header>
-    <div class="container">
-      <p
-        class="text-center text-uppercase font-weight-bold"
-        style="margin-top: 20px; margin-bottom: 20px"
-      >
-        Thêm sản phẩm
-      </p>
-      <form
-        th:action="@{/admin/product/add}"
-        th:object="${product}"
-        id="addProductForm"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        <div class="form-group">
-          <label for="barcode">Barcode</label>
-          <input
-            type="text"
-            class="form-control"
-            id="barcode"
-            name="barcode"
-            placeholder="Nhập mã barcode sản phẩm"
-            th:field="*{barcode}"
-          />
-        </div>
-        <div class="form-group">
-          <label for="name">Tên sản phẩm</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            name="name"
-            placeholder="Nhập tên sản phẩm"
-            th:field="*{name}"
-          />
-        </div>
+    <div class="container-fluid">
+      <div class="row flex-nowrap">
+        <div th:replace="/admin/fragments/sidebar :: sidebar"></div>
 
-        <div class="form-group">
-          <label for="price">Giá</label>
-          <input
-            type="number"
-            class="form-control"
-            id="price"
-            name="price"
-            placeholder="Giá sản phẩm"
-            th:field="*{price}"
-          />
-          <div id="priceSuggest" class="d-flex justify-content-around"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="volume">Dung tích</label>
-          <select
-            class="form-control"
-            id="volume"
-            name="volume"
-            th:field="*{volume}"
+        <div class="container right-content">
+          <p
+            class="text-center text-uppercase font-weight-bold"
+            style="margin-top: 20px; margin-bottom: 20px"
           >
-            <option th:value="5">5ml</option>
-            <option th:value="10">10ml</option>
-            <option th:value="30">30ml</option>
-            <option th:value="50">50ml</option>
-            <option th:value="75">75ml</option>
-            <option th:value="100">100ml</option>
-            <option th:value="125">125ml</option>
-            <option th:value="150">150ml</option>
-            <option th:value="200">200ml</option>
-            <option th:value="250">250ml</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="sex">Giới tính</label>
-          <select class="form-control" id="sex" name="sex" th:field="*{sex}">
-            <option th:value="Nam">Nam</option>
-            <option th:value="Nữ">Nữ</option>
-            <option th:value="Unisex">Unisex</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="images">Link ảnh</label>
-          <div id="imageLinks">
-            <div class="form-group d-flex imageLink">
+            Thêm sản phẩm
+          </p>
+          <form
+            th:action="@{/admin/product/add}"
+            th:object="${product}"
+            id="addProductForm"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="form-group">
+              <label for="barcode">Barcode</label>
               <input
                 type="text"
                 class="form-control"
-                placeholder="Nhập link ảnh"
-                name="images"
+                id="barcode"
+                name="barcode"
+                placeholder="Nhập mã barcode sản phẩm"
+                th:field="*{barcode}"
               />
+            </div>
+            <div class="form-group">
+              <label for="name">Tên sản phẩm</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Nhập tên sản phẩm"
+                th:field="*{name}"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="price">Giá</label>
+              <input
+                type="number"
+                class="form-control"
+                id="price"
+                name="price"
+                placeholder="Giá sản phẩm"
+                th:field="*{price}"
+              />
+              <div
+                id="priceSuggest"
+                class="d-flex justify-content-around"
+              ></div>
+            </div>
+
+            <div class="form-group">
+              <label for="volume">Dung tích</label>
+              <select
+                class="form-control"
+                id="volume"
+                name="volume"
+                th:field="*{volume}"
+              >
+                <option th:value="5">5ml</option>
+                <option th:value="10">10ml</option>
+                <option th:value="30">30ml</option>
+                <option th:value="50">50ml</option>
+                <option th:value="75">75ml</option>
+                <option th:value="100">100ml</option>
+                <option th:value="125">125ml</option>
+                <option th:value="150">150ml</option>
+                <option th:value="200">200ml</option>
+                <option th:value="250">250ml</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="sex">Giới tính</label>
+              <select
+                class="form-control"
+                id="sex"
+                name="sex"
+                th:field="*{sex}"
+              >
+                <option th:value="Nam">Nam</option>
+                <option th:value="Nữ">Nữ</option>
+                <option th:value="Unisex">Unisex</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="images">Link ảnh</label>
+              <div id="imageLinks">
+                <div class="form-group d-flex imageLink">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nhập link ảnh"
+                    name="images"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm remove-image-link"
+                    onclick="this.parentElement.remove();"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </div>
               <button
                 type="button"
-                class="btn btn-danger btn-sm remove-image-link"
-                onclick="this.parentElement.remove();"
+                id="addImageLink"
+                class="btn btn-primary btn-sm"
               >
-                Xóa
+                Thêm ảnh
               </button>
             </div>
-          </div>
-          <button
-            type="button"
-            id="addImageLink"
-            class="btn btn-primary btn-sm"
-          >
-            Thêm ảnh
-          </button>
-        </div>
 
-        <div class="form-group">
-          <label for="brand">Thương hiệu</label>
-          <select
-            class="form-control"
-            id="brand"
-            name="brand"
-            th:field="*{brand}"
-          >
-            <option
-              th:each="brand : ${brands}"
-              th:value="${brand.id}"
-              th:text="${brand.name}"
-            ></option>
-          </select>
-        </div>
+            <div class="form-group">
+              <label for="brand">Thương hiệu</label>
+              <select
+                class="form-control"
+                id="brand"
+                name="brand"
+                th:field="*{brand}"
+              >
+                <option
+                  th:each="brand : ${brands}"
+                  th:value="${brand.id}"
+                  th:text="${brand.name}"
+                ></option>
+              </select>
+            </div>
 
-        <div class="form-group">
-          <label for="style">Phong cách</label>
-          <input
-            type="text"
-            class="form-control"
-            id="style"
-            name="style"
-            placeholder="Phong cách"
-            th:field="*{style}"
-          />
-        </div>
+            <div class="form-group">
+              <label for="style">Phong cách</label>
+              <input
+                type="text"
+                class="form-control"
+                id="style"
+                name="style"
+                placeholder="Phong cách"
+                th:field="*{style}"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="perfume_scent">Nhóm hương</label>
-          <input
-            type="text"
-            class="form-control"
-            id="perfume_scent"
-            name="perfume_scent"
-            placeholder="Nhập nhóm hương"
-            th:field="*{perfumeScent}"
-          />
-        </div>
+            <div class="form-group">
+              <label for="perfume_scent">Nhóm hương</label>
+              <input
+                type="text"
+                class="form-control"
+                id="perfume_scent"
+                name="perfume_scent"
+                placeholder="Nhập nhóm hương"
+                th:field="*{perfumeScent}"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="topNotes">Mùi hương đầu</label>
-          <input
-            type="text"
-            class="form-control"
-            id="topNotes"
-            name="topNotes"
-            placeholder="Nhập mùi hương đầu"
-            th:field="*{topNotes}"
-          />
-        </div>
+            <div class="form-group">
+              <label for="topNotes">Mùi hương đầu</label>
+              <input
+                type="text"
+                class="form-control"
+                id="topNotes"
+                name="topNotes"
+                placeholder="Nhập mùi hương đầu"
+                th:field="*{topNotes}"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="middleNotes">Mùi hương giữa</label>
-          <input
-            type="text"
-            class="form-control"
-            id="middleNotes"
-            name="middleNotes"
-            placeholder="Nhập mùi hương giữa"
-            th:field="*{middleNotes}"
-          />
-        </div>
+            <div class="form-group">
+              <label for="middleNotes">Mùi hương giữa</label>
+              <input
+                type="text"
+                class="form-control"
+                id="middleNotes"
+                name="middleNotes"
+                placeholder="Nhập mùi hương giữa"
+                th:field="*{middleNotes}"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="baseNotes">Mùi hương cuối</label>
-          <input
-            type="text"
-            class="form-control"
-            id="baseNotes"
-            name="baseNotes"
-            placeholder="Nhập mùi hương cuối"
-            th:field="*{baseNotes}"
-          />
-        </div>
+            <div class="form-group">
+              <label for="baseNotes">Mùi hương cuối</label>
+              <input
+                type="text"
+                class="form-control"
+                id="baseNotes"
+                name="baseNotes"
+                placeholder="Nhập mùi hương cuối"
+                th:field="*{baseNotes}"
+              />
+            </div>
 
-        <div class="form-group">
-          <label for="description">Mô tả</label>
-          <textarea
-            class="form-control"
-            id="description"
-            name="description"
-            th:field="*{description}"
-          ></textarea>
-        </div>
+            <div class="form-group">
+              <label for="description">Mô tả</label>
+              <textarea
+                class="form-control"
+                id="description"
+                name="description"
+                th:field="*{description}"
+              ></textarea>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
-      </form>
+            <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+          </form>
+        </div>
+      </div>
     </div>
+    <footer th:replace="/admin/fragments/footer :: footer"></footer>
   </body>
 
+  <!-- <script th:src="@{/assetsUser/js/sidebar.js}"></script> -->
+  <script src="/utilities/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
   <script>
     CKEDITOR.replace("howToUse");
@@ -218,6 +260,45 @@
 
         // Form sẽ tự động gửi sau khi cập nhật giá trị này
       });
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      // Hàm cập nhật chiều cao của .sidebar
+      function updateSidebarHeight() {
+        var contentHeight = $(".right-content").height();
+        $(".sidebar").height(contentHeight + 500);
+      }
+
+      // Cập nhật chiều cao khi trang được tải
+      updateSidebarHeight();
+
+      // Thêm link ảnh
+      document
+        .getElementById("addImageLink")
+        .addEventListener("click", function () {
+          const container = document.getElementById("imageLinks");
+          const index = container.children.length; // Lấy số lượng hiện tại của các input để tạo index động
+          const inputHTML = `<div class="form-group d-flex">
+        <input type="text" class="form-control" name="images" placeholder="Nhập link ảnh" />
+        <button type="button" class="btn btn-danger btn-sm remove-image-link" onclick="this.parentElement.remove(); updateRemoveButtonState(); updateSidebarHeight();">Xóa</button>
+      </div>`;
+          container.insertAdjacentHTML("beforeend", inputHTML);
+          updateRemoveButtonState();
+          updateSidebarHeight(); // Cập nhật chiều cao sau khi thêm
+        });
+
+      // Xóa link ảnh
+      document
+        .getElementById("imageLinks")
+        .addEventListener("click", function (e) {
+          if (e.target.classList.contains("remove-image-link")) {
+            e.target.parentElement.remove();
+            updateRemoveButtonState();
+            updateSidebarHeight(); // Cập nhật chiều cao sau khi xóa
+          }
+        });
+    });
   </script>
 
   <script>

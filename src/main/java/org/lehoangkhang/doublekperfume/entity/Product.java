@@ -43,6 +43,10 @@ public class Product {
     // Phong cách
     @Column(name = "style")
     private String style;
+
+    // Còn bán
+    @Column(name = "is_available")
+    private Boolean isAvailable;
     
 
     @Override

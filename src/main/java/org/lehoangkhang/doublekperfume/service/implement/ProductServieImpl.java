@@ -51,4 +51,20 @@ public class ProductServieImpl implements ProductService {
     public void deleteProduct(String id) {
 
     }
+
+    @Override
+    public void updateAvailable(String id, Boolean isAvailable) {
+        try {
+            Product product = productRepostory.findById(id).orElse(null);
+            product.setIsAvailable(isAvailable);
+            productRepostory.save(product);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Product> getAvailableProducts() {
+        return productRepostory.findByIsAvailable(true);
+    }
 }

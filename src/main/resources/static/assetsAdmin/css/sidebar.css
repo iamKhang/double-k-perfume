@@ -1,0 +1,14 @@
+.sidebar-nav-link{
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 10px 0;
+    /* text-align: center; */
+    /* text-decoration: none; */
+    /* display: block; */
+    /* transition: 0.3s; */
+}
+
+.sidebar{
+  background-color: rgb(34, 80, 62);
+}

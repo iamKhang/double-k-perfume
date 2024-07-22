@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale.Category;
 import java.util.Set;
 
 @Controller
@@ -47,6 +45,15 @@ public class ProductController {
         return "redirect:/admin/product/add";
     }
 
+    @RequestMapping("/list")
+    public String listProduct(Model model) {
+        List<Product> products = productService.getAllProducts();
+        System.out.println(products);
+        model.addAttribute("products", products);
+        return "admin/pages/listProduct";
+    }
+
+
 
     @GetMapping("/edit/{id}")
 	public String editProduct(Model model, @PathVariable("id") String id) {
@@ -59,6 +66,8 @@ public class ProductController {
         model.addAttribute("brands", brands);
 	    return "admin/pages/editProduct";
 	}
+
+
 	
 	@PostMapping("/product/edit/save")
 	public String saveEdit(@ModelAttribute Product product) {
@@ -67,6 +76,12 @@ public class ProductController {
 		}
 		return "admin/pages/editProduct";
 	}
+
+    @RequestMapping("/delete/{id}/{isAvailable}")
+    public String deleteProduct(@PathVariable("id") String id, @PathVariable("isAvailable") Boolean isAvailable) {
+        productService.updateAvailable(id, isAvailable);
+        return "redirect:/admin/product/list";
+    }
 
 
 }

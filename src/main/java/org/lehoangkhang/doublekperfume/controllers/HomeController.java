@@ -18,8 +18,8 @@ public class HomeController {
 
     @RequestMapping
     public String home(Model model) {
-        List<Product> products = productService.getAllProducts();
-        System.out.println(products);
+        List<Product> products = productService.getAvailableProducts();
+        // System.out.println(products);
         model.addAttribute("products", products);
         return "user/index";
     }
@@ -34,5 +34,11 @@ public class HomeController {
     @GetMapping("/login")
     public String login() {
         return "user/pages/loginPage";
+    }
+
+    // Vào trang quản lý
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin/pages/adminPage";
     }
 }
