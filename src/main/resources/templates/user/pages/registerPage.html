@@ -22,7 +22,7 @@
   <body>
     <header th:replace="/user/fragments/header :: header"></header>
     <div class="container-fluid d-flex justify-content-center login_container_bg">
-      <form class="login_form" action="">
+      <form class="login_form" th:action="@{/register}" method="post">
         <p class="login_form_heading">Đăng kí</p>
         <p class="">Đăng kí tài khoản để nhận toàn bộ ưu đãi!</p>
         <div class="d-flex">
@@ -30,7 +30,8 @@
             <i class="fa-solid fa-address-card login_form_inputIcon"></i>
             <input
               placeholder="Họ"
-              id="username"
+              id="lastName"
+              name="lastName"
               class="login_form_inputField"
               type="text"
             />
@@ -39,7 +40,8 @@
             <i class="fa-solid fa-address-card login_form_inputIcon"></i>
             <input
               placeholder="Tên"
-              id="username"
+              id="firstName"
+                name="firstName"
               class="login_form_inputField"
               type="text"
             />
@@ -50,6 +52,7 @@
           <input
             placeholder="Tên người dùng"
             id="username"
+            name="username"
             class="login_form_inputField"
             type="text"
           />
@@ -59,7 +62,8 @@
           <i class="fa-solid fa-at login_form_inputIcon"></i>
           <input
             placeholder="Email"
-            id="username"
+            id="email"
+            name="email"
             class="login_form_inputField"
             type="text"
           />
@@ -70,6 +74,7 @@
           <input
             placeholder="Mật khẩu"
             id="password"
+            name="password"
             class="login_form_inputField"
             type="password"
           />
@@ -79,7 +84,8 @@
           <i class="fa-solid fa-lock login_form_inputIcon"></i>
           <input
             placeholder="Xác nhận mật khẩu"
-            id="password"
+            id="confirmPassword"
+            name="confirmPassword"
             class="login_form_inputField"
             type="password"
           />

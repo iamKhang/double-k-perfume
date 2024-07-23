@@ -22,7 +22,7 @@
   <body>
     <header th:replace="/user/fragments/header :: header"></header>
     <div class="container-fluid d-flex justify-content-center login_container_bg">
-      <form class="login_form" action="">
+      <form class="login_form" th:action="@{/login}" method="post">
         <p class="login_form_heading">Đăng nhập</p>
         <div class="login_form_inputContainer">
           <svg
