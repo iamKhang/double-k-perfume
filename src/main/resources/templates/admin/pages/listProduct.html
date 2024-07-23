@@ -51,6 +51,7 @@
                 <th scope="col">Giá</th>
                 <th scope="col">Hình ảnh</th>
                 <th scope="col">Dung tích</th>
+                <th scope="col">Bán chạy</th>
                 <th scope="col">Tình trạng</th>
                 <th scope="col">Hành động</th>
               </tr>
@@ -70,19 +71,34 @@
                   />
                 </td>
                 <td th:text="*{product.volume}">Dung tích</td>
+                <!-- Sản phẩm bán chạy -->
+                <td
+                  th:if="${product.isBestSeller == true}"
+                  class="text-success text-bold"
+                >
+                  bán chạy
+                </td>
+
+                <td th:if="${product.isBestSeller == false || product.isBestSeller == null}" class="text-danger">
+                  <p>   </p>
+                </td>
+
+
+
                 <!-- Tình trạng nếu là false hoặc null thì hiển thị ngừng cung cấp ngược lại hiển thị rỗng -->
                 <td
                   th:if="${product.isAvailable == false || product.isAvailable == null}"
+                  class="text-danger"
                 >
                   Ngừng cung cấp
                 </td>
 
-                <td th:if="${product.isAvailable == true}">Còn cung cấp</td>
+                <td class="text-success" th:if="${product.isAvailable == true}"><p></p></td>
 
-                <td>
+                <td class="d-flex">
                   <a
                     th:href="@{/admin/product/edit/{id}(id=${product.barcode})}"
-                    class="btn btn-primary"
+                    class="btn btn-primary mr-2"
                   >
                     Sửa
                   </a>

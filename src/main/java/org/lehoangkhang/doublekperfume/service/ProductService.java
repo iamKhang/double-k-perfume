@@ -14,4 +14,10 @@ public interface ProductService {
     public void updateAvailable(String id, Boolean isAvailable);
     // Lấy sản phẩm còn bán
     public List<Product> getAvailableProducts();
+
+    // Lấy danh sách sản phẩm theo trang
+    public List<Product> getProductsByPage(int page);
+
+    // Lấy số trang sản phẩm
+    public int getNumberOfPages();
 }

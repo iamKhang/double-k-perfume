@@ -47,6 +47,18 @@ public class Product {
     // Còn bán
     @Column(name = "is_available")
     private Boolean isAvailable;
+
+    // Sản phẩm bán chạy
+    @Column(name = "is_best_seller")
+    private Boolean isBestSeller;
+
+    // Số lượng sản phẩm còn lại
+    @Column(name = "quantity")
+    private int quantity;
+
+    // Số lượng sản phẩm đã bán
+    @Column(name = "sold_quantity")
+    private int soldQuantity;
     
 
     @Override

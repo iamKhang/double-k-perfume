@@ -1,9 +1,11 @@
 package org.lehoangkhang.doublekperfume.service.implement;
 
+import org.springframework.data.domain.Page;
 import org.lehoangkhang.doublekperfume.entity.Product;
 import org.lehoangkhang.doublekperfume.repository.ProductRepostory;
 import org.lehoangkhang.doublekperfume.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,5 +68,29 @@ public class ProductServieImpl implements ProductService {
     @Override
     public List<Product> getAvailableProducts() {
         return productRepostory.findByIsAvailable(true);
+    }
+
+    @Override
+    public List<Product> getProductsByPage(int page) {
+        try{
+            Page<Product> productPage = productRepostory.findAll(PageRequest.of(page, 2));
+            return productPage.getContent();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public int getNumberOfPages() {
+        try{
+            Page<Product> productPage = productRepostory.findAll(PageRequest.of(0, 2));
+            return productPage.getTotalPages();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

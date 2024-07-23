@@ -1,0 +1,78 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <!--Replace Head-->
+  <head th:replace="/user/fragments/Head :: head">
+    <title>DoubleKPerfume</title>
+  </head>
+
+  <body>
+    <header th:replace="/user/fragments/header :: header"></header>
+    <div class="container">
+      <div id="products">
+        <div class="row">
+          <div class="col-md-3" th:each="product : ${products}">
+            <img
+              th:if="${!product.images.empty}"
+              th:src="${product.images.iterator().next()}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <p
+                class="card-text"
+                th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+              >
+                1.500.000 đ
+              </p>
+              <!-- Nhà chế tác -->
+              <p>
+                <!-- th:href="@{/brand/{name}(name=${product.brand.name})}" -->
+                <a th:text="${product.brand.name}">Narciso Rodriguez</a>
+              </p>
+              <h5 class="card-title" th:text="${product.name}">
+                Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml
+              </h5>
+              <div class="item-btn">
+                <button class="btn btn-heart">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="btn btn-add-to-cart btn-primary">
+                  <i class="fa-solid fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hiển thị các nút cho phân trang -->
+    <div class="d-flex justify-content-center" style="margin: 20px 0">
+      <!-- Sử dụng th:each hiển thị ra các option trang -->
+      <a
+        th:if="${currentPage > 1}"
+        th:href="@{/products(page=${currentPage - 1})}"
+        class=""
+        style="margin: 5px"
+        >Previous</a
+      >
+      <a
+        th:each="i : ${#numbers.sequence(1, totalPage)}"
+        th:href="@{/products(page=${i})}"
+        th:text="${i}"
+        th:classappend="${i == currentPage ? 'btn' : ''}"
+        style="margin: 5px"
+      ></a>
+      <a
+        th:if="${currentPage < totalPage}"
+        th:href="@{/products(page=${currentPage + 1})}"
+        class=""
+        style="margin: 5px"
+        >Next</a
+      >
+    </div>
+
+    <footer id="footer" th:replace="/user/fragments/Footer :: footer"></footer>
+
+    <script th:src="@{assetsUser/js/index.js}" type="module"></script>
+  </body>
+</html>
