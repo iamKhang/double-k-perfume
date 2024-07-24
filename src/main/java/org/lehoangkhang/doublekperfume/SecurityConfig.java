@@ -11,17 +11,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-//	@Autowired
-//	private CustomUserDetailService customUserDetailService;
-
     @Bean
     @SuppressWarnings("deprecation")
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
-                .authorizeRequests(auth -> auth.requestMatchers("/*").permitAll()
-                        .requestMatchers("/admin/**").hasAuthority("Manager")
-//						.requestMatchers("/admin/**").permitAll()
-                        .anyRequest().authenticated())
+                .authorizeRequests(auth ->
+                        auth
+                                .requestMatchers("/admin").hasAuthority("ADMIN")
+                                .requestMatchers("/*").permitAll()
+                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                                .anyRequest().authenticated())
                 .formLogin(login -> login.loginPage("/login").loginProcessingUrl("/login").usernameParameter("username")
                         .passwordParameter("password").defaultSuccessUrl("/admin", true))
                 .logout(logout -> logout.logoutUrl("/admin-logout").logoutSuccessUrl("/login") );

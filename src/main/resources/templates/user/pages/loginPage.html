@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,7 +22,7 @@
   <body>
     <header th:replace="/user/fragments/header :: header"></header>
     <div class="container-fluid d-flex justify-content-center login_container_bg">
-      <form class="login_form" th:action="@{/login}" method="post">
+      <form class="login_form" action="/login" method="post">
         <p class="login_form_heading">Đăng nhập</p>
         <div class="login_form_inputContainer">
           <svg
@@ -40,6 +40,7 @@
           <input
             placeholder="Username"
             id="username"
+            name="username"
             class="login_form_inputField"
             type="text"
           />
@@ -61,12 +62,13 @@
           <input
             placeholder="Password"
             id="password"
+            name="password"
             class="login_form_inputField"
             type="password"
           />
         </div>
 
-        <button id="login_form_button">Đăng nhập</button>
+        <button type="submit"  id="login_form_button">Đăng nhập</button>
         <div class="login_form_signupContainer">
           <a href="">Bạn chưa có tài khoản?</a>
           <a href="#">Quên mật khẩu?</a>

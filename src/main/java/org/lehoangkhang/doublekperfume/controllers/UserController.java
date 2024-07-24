@@ -7,6 +7,7 @@ import org.lehoangkhang.doublekperfume.entity.User;
 import org.lehoangkhang.doublekperfume.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,12 +28,14 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@ModelAttribute User user) {
-        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-        user.setRole(new Role(1L, "ROLE_USER", "Người dùng có quyền xem sản phẩm"));
-        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        user.setRole(new Role(1L, "USER", "Người dùng có quyền xem sản phẩm"));
+
         user.setEnabled(true);
         userService.addUser(user);
-
+        System.out.println("Mật khẩu đã được mã hóa: " + new BCryptPasswordEncoder().encode("1"));
 
         return "redirect:/";
     }
