@@ -65,3 +65,4 @@ public class HomeController {
         return "user/pages/productsPage";
     }
 }
+
