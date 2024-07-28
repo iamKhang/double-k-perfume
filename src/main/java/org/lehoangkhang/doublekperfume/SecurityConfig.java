@@ -18,7 +18,7 @@ public class SecurityConfig {
                 .authorizeRequests(auth ->
                         auth
                                 .requestMatchers("/admin").hasAuthority("ADMIN")
-                                .requestMatchers("/*").permitAll()
+                                .requestMatchers("/**").permitAll()
                                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated())
                 .formLogin(login -> login.loginPage("/login").loginProcessingUrl("/login").usernameParameter("username")
@@ -30,7 +30,7 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().requestMatchers(
-                "/assets/**", "/assetsUser/**", "uploads/**"
+                "/assets/**", "/assetsUser/**", "uploads/**", "/assetsAdmin/**"
         );
     }
 

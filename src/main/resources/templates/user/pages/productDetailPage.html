@@ -1,0 +1,39 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--Replace Head-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoubleKPerfume</title>
+    <link rel="stylesheet" href="/assetsUser/lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assetsUser/lib/fontawesome-free-6.3.0-web/css/all.css">
+    <link rel="stylesheet" href="/assetsUser/css/main.css">
+    <link rel="stylesheet" href="/assetsUser/css/header.css">
+    <link rel="stylesheet" href="/assetsUser/css/footer.css">
+    <link rel="stylesheet" href="/assetsUser/css/login.css">
+</head>
+
+<body>
+<header th:replace="/user/fragments/header :: header"></header>
+
+<!--Chi tiết sản phẩm-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img th:src="${product.images.iterator().next()}" class="card-img-top" alt="...">
+        </div>
+        <div class="col-md-6">
+            <h1 th:text="${product.name}">Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml</h1>
+            <p th:utext="${product.description}">Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml</p>
+            <p th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">1.500.000 đ</p>
+            <button class="btn btn-primary">Thêm vào giỏ hàng</button>
+        </div>
+    </div>
+</div>
+
+
+    <footer id="footer" th:replace="/user/fragments/Footer :: footer"></footer>
+
+
+</body>
+</html>

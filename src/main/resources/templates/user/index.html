@@ -10,16 +10,17 @@
       <div id="products">
         <div class="row">
           <div class="col-md-3" th:each="product : ${products}">
+          <a th:href="@{/product-detail/{id}(id=${product.barcode})}"          >
             <img
-              th:if="${!product.images.empty}"
-              th:src="${product.images.iterator().next()}"
-              class="card-img-top"
-              alt="..."
+                    th:if="${!product.images.empty}"
+                    th:src="${product.images.iterator().next()}"
+                    class="card-img-top"
+                    alt="..."
             />
             <div class="card-body">
               <p
-                class="card-text"
-                th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                      class="card-text"
+                      th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"
               >
                 1.500.000 đ
               </p>
@@ -40,6 +41,7 @@
                 </button>
               </div>
             </div>
+          </a>
           </div>
         </div>
       </div>
