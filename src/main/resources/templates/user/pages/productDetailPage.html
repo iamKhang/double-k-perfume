@@ -1,39 +1,143 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--Replace Head-->
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--Replace Head-->
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DoubleKPerfume</title>
-    <link rel="stylesheet" href="/assetsUser/lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assetsUser/lib/fontawesome-free-6.3.0-web/css/all.css">
-    <link rel="stylesheet" href="/assetsUser/css/main.css">
-    <link rel="stylesheet" href="/assetsUser/css/header.css">
-    <link rel="stylesheet" href="/assetsUser/css/footer.css">
-    <link rel="stylesheet" href="/assetsUser/css/login.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="/assetsUser/lib/bootstrap-4.5.3-dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/assetsUser/lib/fontawesome-free-6.3.0-web/css/all.css"
+    />
+    <link rel="stylesheet" href="/assetsUser/css/main.css" />
+    <link rel="stylesheet" href="/assetsUser/css/header.css" />
+    <link rel="stylesheet" href="/assetsUser/css/footer.css" />
+    <link rel="stylesheet" href="/assetsUser/css/login.css" />
+    <link rel="stylesheet" href="/assetsUser/css/main.css" />
+    <link rel="stylesheet" href="/utilities/main.css" />
+    <link rel="stylesheet" href="/utilities/index.css" />
 
-<body>
-<header th:replace="/user/fragments/header :: header"></header>
+    <style>
+        /* Css cho toàn bộ các ảnh nằm bên trong product-description được căn giữa */
+        .product-description img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;
+        }
+    </style>
+  </head>
 
-<!--Chi tiết sản phẩm-->
-<div class="container">
-    <div class="row">
+  <body>
+    <header th:replace="/user/fragments/header :: header"></header>
+
+    <!--Chi tiết sản phẩm-->
+    <div class="container mt-4">
+      <div class="row">
         <div class="col-md-6">
-            <img th:src="${product.images.iterator().next()}" class="card-img-top" alt="...">
+          <div class="row">
+            <img
+              th:src="${product.images.iterator().next()}"
+              class="image-product-main"
+            />
+          </div>
+          <div class="row">
+            <div class="col-3" th:each="image, iterStat : ${product.images}">
+              <img
+                th:if="${iterStat.index > 0}"
+                th:src="${image}"
+                class="img-thumbnail image-product-extra"
+              />
+            </div>
+          </div>
         </div>
+
         <div class="col-md-6">
-            <h1 th:text="${product.name}">Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml</h1>
-            <p th:utext="${product.description}">Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml</p>
-            <p th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">1.500.000 đ</p>
-            <button class="btn btn-primary">Thêm vào giỏ hàng</button>
+          <h3 th:text="${product.brand.name}">Thương hiệu</h3>
+
+          <p>
+            <a th:text="${product.brand.name}" class="product-name">Narciso Rodriguez</a>
+          </p>
+
+          <!-- Đánh giá -->
+          <div class="rating d-flex justify-content-start">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span>đánh giá</span>
+          </div>
+
+          <span class="mt-4 d-flex align-items-end">
+            <h1
+              th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+              class="font-weight-bold text-extra-color"
+            ></h1>
+            <p class="ml-2">(Đã bao gồm VAT)</p>
+          </span>
+
+          <!-- Hiển thị dung tích -->
+          <p>
+            <span class="font-weight-bold">Dung tích:</span>
+            <span th:text="${product.volume}">30ml</span>
+            <span>ml</span>
+          </p>
+
+          <p>
+            <!-- Số lượng -->
+            <span class="font-weight-bold">Số lượng:</span>
+            <input type="number" class="" value="1" min="1" max="10" />
+          </p>
+
+          <div class="d-flex">
+            <button class="btn mr-3"><i class="fa-solid fa-cart-plus"></i></button>
+            <button class="btn">Mua ngay</button>
+          </div>
         </div>
+      </div>
+
+      <div class="product-description">
+        <p class="" th:utext="${product.description}">
+          Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml
+        </p>
+      </div>
     </div>
-</div>
-
+    <!-- <div class="col-md-6">
+      <h1 th:text="${product.name}">
+        Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml
+      </h1>
+      <p th:utext="${product.description}">
+        Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml
+      </p>
+      <p
+        th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+      >
+        1.500.000 đ
+      </p>
+      <button class="btn btn-primary">Thêm vào giỏ hàng</button>
+    </div> -->
 
     <footer id="footer" th:replace="/user/fragments/Footer :: footer"></footer>
 
+    <script src="/utilities/jquery.js"></script>
 
-</body>
+    <script>
+      $(document).ready(function () {
+        $(".image-product-extra").click(function () {
+          var mainImage = $(".image-product-main");
+          var extraImage = $(this);
+
+          // Hoán đổi src của ảnh chính và ảnh phụ
+          var tempSrc = mainImage.attr("src");
+          mainImage.attr("src", extraImage.attr("src"));
+          extraImage.attr("src", tempSrc);
+        });
+      });
+    </script>
+  </body>
 </html>

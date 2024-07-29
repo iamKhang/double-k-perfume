@@ -1,0 +1,23 @@
+.product-description img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.title-hot-product-icon {
+  color: red;
+  font-size: 1.4rem;
+  margin-left: 10px;
+}
+
+.product-name {
+  display: -webkit-box;
+  /* -webkit-line-clamp: 2;  */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  height: 4.5em; /* Giả sử mỗi dòng cao khoảng 1.5em */
+  line-height: 1.5em; /* Chiều cao của mỗi dòng */
+}

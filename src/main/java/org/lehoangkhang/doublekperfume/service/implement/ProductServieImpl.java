@@ -73,7 +73,7 @@ public class ProductServieImpl implements ProductService {
     @Override
     public List<Product> getProductsByPage(int page) {
         try{
-            Page<Product> productPage = productRepostory.findAll(PageRequest.of(page, 2));
+            Page<Product> productPage = productRepostory.findAll(PageRequest.of(page, 5));
             return productPage.getContent();
         }
         catch (Exception e){
@@ -85,7 +85,7 @@ public class ProductServieImpl implements ProductService {
     @Override
     public int getNumberOfPages() {
         try{
-            Page<Product> productPage = productRepostory.findAll(PageRequest.of(0, 2));
+            Page<Product> productPage = productRepostory.findAll(PageRequest.of(0, 5));
             return productPage.getTotalPages();
         }
         catch (Exception e){

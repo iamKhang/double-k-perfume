@@ -18,8 +18,8 @@ public class SecurityConfig {
                 .authorizeRequests(auth ->
                         auth
                                 .requestMatchers("/admin").hasAuthority("ADMIN")
-                                .requestMatchers("/**").permitAll()
                                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                                .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(login -> login.loginPage("/login").loginProcessingUrl("/login").usernameParameter("username")
                         .passwordParameter("password").defaultSuccessUrl("/admin", true))

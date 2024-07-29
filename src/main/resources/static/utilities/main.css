@@ -1,0 +1,44 @@
+/* Biến màu mặc định */
+:root {
+    --main-color: rgb(34, 80, 62);
+    --extra-color: #FFB200;
+    --main-color-hover: rgb(34, 80, 62, 0.8);
+}
+
+.text-extra-color {
+    color: var(--extra-color);
+}
+
+.btn:hover {
+    background-color: var(--main-color-hover);
+    color: var(--extra-color);
+    transition: background-color 0.3s;
+}
+
+/* Button */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: var(--main-color);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: rgb(34, 80, 62, 0.8);
+
+}
+
+/* Khi hover biến border thành màu extra */
+.border-extra-color:hover {
+    border: 1px solid var(--extra-color);
+}
+
+.icon{
+    /* font-size: 1.2rem; */
+}

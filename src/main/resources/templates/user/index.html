@@ -1,47 +1,74 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <!--Replace Head-->
-  <head th:replace="/user/fragments/Head :: head">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DoubleKPerfume</title>
+    <link
+      rel="stylesheet"
+      th:href="@{assetsUser/lib/bootstrap-4.5.3-dist/css/bootstrap.min.css}"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{assetsUser/lib/fontawesome-free-6.3.0-web/css/all.css}"
+    />
+    <link rel="stylesheet" th:href="@{assetsUser/css/main.css}" />
+    <link rel="stylesheet" th:href="@{assetsUser/css/header.css}" />
+    <link rel="stylesheet" th:href="@{assetsUser/css/footer.css}" />
+
+    <link rel="stylesheet" href="/utilities/main.css" />
+    <link rel="stylesheet" href="assetsUser/css/index.css" />
   </head>
 
   <body>
     <header th:replace="/user/fragments/header :: header"></header>
     <div class="container">
+      <!-- Sản phẩm hot -->
+      <div class="row">
+        <div class="col-md-12 d-flex align-items-center">
+          <h2 class="">Sản phẩm hot</h2>
+          <i class="fa-solid fa-fire title-hot-product-icon"></i>
+        </div>
+      </div>
       <div id="products">
         <div class="row">
-          <div class="col-md-3" th:each="product : ${products}">
-          <a th:href="@{/product-detail/{id}(id=${product.barcode})}"          >
-            <img
-                    th:if="${!product.images.empty}"
-                    th:src="${product.images.iterator().next()}"
-                    class="card-img-top"
-                    alt="..."
-            />
-            <div class="card-body">
-              <p
-                      class="card-text"
-                      th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"
-              >
-                1.500.000 đ
-              </p>
-              <!-- Nhà chế tác -->
-              <p>
-                <!-- th:href="@{/brand/{name}(name=${product.brand.name})}" -->
-                <a th:text="${product.brand.name}">Narciso Rodriguez</a>
-              </p>
-              <h5 class="card-title" th:text="${product.name}">
-                Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml
-              </h5>
-              <div class="item-btn">
-                <button class="btn btn-heart">
-                  <i class="fa-regular fa-heart"></i>
-                </button>
-                <button class="btn btn-add-to-cart btn-primary">
-                  <i class="fa-solid fa-cart-plus"></i>
-                </button>
+          <div
+            class="col-md-3 border-extra-color"
+            th:each="product : ${products}"
+          >
+            <a th:href="@{/product-detail/{id}(id=${product.barcode})}">
+              <img
+                th:if="${!product.images.empty}"
+                th:src="${product.images.iterator().next()}"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <p
+                  class="card-text text-extra-color font-weight-bold"
+                  th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                >
+                  1.500.000 đ
+                </p>
+                <!-- Nhà chế tác -->
+                <p>
+                  <a th:text="${product.brand.name}">Narciso Rodriguez</a>
+                </p>
+                <h5 class="card-title product-name" th:text="${product.name}">
+                  Nước hoa nữ Narciso Rodriguez Ambree EDP 30ml
+                </h5>
+                <div class="item-btn d-flex justify-content-between">
+                  <button class="btn btn-heart icon">
+                    <i class="fa-regular fa-heart"></i>
+                  </button>
+                  <button class="btn icon">
+                    <i class="fa-solid fa-cart-plus"></i>
+                  </button>
+                  <button class="btn">Mua ngay</button>
+                </div>
               </div>
-            </div>
-          </a>
+            </a>
           </div>
         </div>
       </div>
